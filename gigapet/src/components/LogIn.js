@@ -1,8 +1,8 @@
 import React from 'react';
 import { withFormik, Form, Field } from 'formik';
-import * as Yup from 'yup'
+import * as Yup from 'yup';
 
-const FormFields = () =>{
+const FormFields = ({errors, touched,}) =>{
     
     
     return(
@@ -10,9 +10,11 @@ const FormFields = () =>{
             <Form>
                 <h1>Sign In</h1>
                 <Field type="text" name="name" placeholder="User Name" />
-
+                {touched.name && errors.name && <p>{errors.name}</p>}
+                
                 <Field type="password" name="password" placeholder="Password" />
-
+                {touched.password && errors.password && <p>{errors.password}</p>}
+                
                 <button type="submit">Log In</button>
             </Form>
 
@@ -38,3 +40,5 @@ const LogIn = withFormik({
     }
 
 })(FormFields);
+
+export default LogIn;
