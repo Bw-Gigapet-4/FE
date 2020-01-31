@@ -2,7 +2,7 @@ import React from 'react';
 import { withFormik, Form, Field } from 'formik';
 import * as Yup from 'yup';
 
-const FormFields = ({errors, touched,}) =>{
+const FormFields = ({errors, touched}) =>{
     
     
     return(
@@ -17,6 +17,7 @@ const FormFields = ({errors, touched,}) =>{
                 
                 <button type="submit">Log In</button>
                 <p>Don't have an account?</p>
+                {/* switch this sign up button to a route link when routes are assigned */}
                 <button>Sign Up</button>
             </Form>
 
@@ -33,8 +34,14 @@ const LogIn = withFormik({
     },
 
     validationSchema: Yup.object().shape({
-        name: Yup.string().required("User Name is Required"),
-        password: Yup.string().min(8, "Password must be 8 characters or longer").required("Password is Required"),
+        name: Yup
+        .string()
+        .required("User Name is Required"),
+        
+        password: Yup
+        .string()
+        .min(8, "Password must be 8 characters or longer")
+        .required("Password is Required"),
     }),
 
     handleSubmit(values){
