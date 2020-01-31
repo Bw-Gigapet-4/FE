@@ -16,6 +16,8 @@ const FormFields = ({errors, touched,}) =>{
                 {touched.password && errors.password && <p>{errors.password}</p>}
                 
                 <button type="submit">Log In</button>
+                <p>Don't have an account?</p>
+                <button>Sign Up</button>
             </Form>
 
         </div>
