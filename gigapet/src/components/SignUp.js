@@ -3,7 +3,9 @@ import { withFormik, Form, Field } from 'formik';
 import * as Yup from 'yup';
 import axios from "axios";
 
+
 const SignUpFields =({ errors, touched })=>{
+
     
     return(
         <div>
@@ -63,6 +65,7 @@ const SignUp = withFormik({
     }),
 
     handleSubmit(values){
+        //removes ckPassword field so only values needed get sent.
         delete values.ckPassword;
         console.log("submit from signUp", values);
 
@@ -76,6 +79,8 @@ const SignUp = withFormik({
         //         console.log("Post Error", error.response);
         //     });
 
+    
+    
 
     }
 
