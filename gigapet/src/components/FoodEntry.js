@@ -2,34 +2,43 @@ import React from "react";
 import { withFormik, Form, Field } from 'formik';
 import * as Yup from 'yup';
 import axios from "axios";
+import { FormFood, FormError, FoodFormLable  } from "../styles"
 
 const FoodFields = ({ errors, touched} )=>{
     return(
         <div>
             <Form>
-                <h2>What are we eating?</h2>
+                <FormFood>
+                    <FoodFormLable >Add a food entry</FoodFormLable >
 
-                <Field type="date" name="date" />
-                {touched.date && errors.date && <p>{errors.date}</p>}
-
-                <Field as="select" name="food" >
-                    <option value="none">Choose an Option</option>
-                    <option value="fruits">Fruits</option>
-                    <option value="vegetables">Vegetables</option>
-                    <option value="grains">Whole Grains</option>
-                    <option value="meat">Meat</option>
-                    <option value="dairy">Dairy</option>
-                    <option value="fats">Fats and Oils</option>
-                    <option value="treats">Treats</option>
-                </Field>
-                {touched.food && errors.food && <p>{errors.food}</p>}
-
-                <Field type="text" name="portions" placeholder="Portions/Servings"/>
-                {touched.portions && errors.portions && <p>{errors.portions}</p>}
-
-                <button type="submit">Add an Entry</button>
-
+                    <div>
+                        <Field type="date" name="date" />
+                        {touched.date && errors.date && <FormError>{errors.date}</FormError>}
+                    </div>
+                    <div>
+                        <Field as="select" name="food" >
+                        <option value="none">Choose an Option</option>
+                        <option value="fruits">Fruits</option>
+                        <option value="vegetables">Vegetables</option>
+                        <option value="grains">Whole Grains</option>
+                        <option value="meat">Meat</option>
+                        <option value="dairy">Dairy</option>
+                        <option value="fats">Fats and Oils</option>
+                        <option value="treats">Treats</option>
+                        </Field>
+                        {touched.food && errors.food && <FormError>{errors.food}</FormError>}
+                    </div>
+                    <div>
+                        <Field type="text" name="portions" placeholder="Portions/Servings"/>
+                        {touched.portions && errors.portions && <FormError>{errors.portions}</FormError>}
+                    </div>
+                    <div>
+                       <button type="submit">Add an Entry</button> 
+                    </div>
+                    
+                </FormFood>
             </Form>
+            
         </div>
     );
 }
@@ -59,6 +68,7 @@ const FoodEntry = withFormik({
         .required("Portion/Servings is required"),
     }),
 
+    // insert resetForm  when axios call is completed
     handleSubmit(values){
         console.log("submit from FoodEntry", values);
 

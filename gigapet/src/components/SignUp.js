@@ -2,42 +2,49 @@ import React from "react";
 import { withFormik, Form, Field } from 'formik';
 import * as Yup from 'yup';
 import axios from "axios";
+import {FormContainer, FormItem, FormError} from "../styles";
 
 
 const SignUpFields =({ errors, touched })=>{
 
     
     return(
-        <div>
+        <FormContainer className="boarding">
             <Form>
                 <h1>Sign Up</h1>
 
-                <Field type="text" name="name" placeholder="User Name" />
-                {touched.name && errors.name && <p>{errors.name}</p>}
-
-                <Field type="password" name="password" placeholder="Create a Password" />
-                {touched.password && errors.password && <p>{errors.password}</p>}
-
-                <Field type="password" name="ckPassword" placeholder="Re-Enter Password" />          
-                {touched.ckPassword && errors.ckPassword && <p>{errors.ckPassword}</p>}
-
+                <FormItem>
+                    <Field type="text" name="username" placeholder="User Name" />
+                    {touched.name && errors.name && <FormError>{errors.name}</FormError>}
+                </FormItem>
+                <FormItem>
+                    <Field type="password" name="password" placeholder="Create a Password" />
+                    {touched.password && errors.password && <FormError>{errors.password}</FormError>}
+                </FormItem>
+                <FormItem>
+                    <Field type="password" name="ckPassword" placeholder="Re-Enter Password" />          
+                    {touched.ckPassword && errors.ckPassword && <FormError>{errors.ckPassword}</FormError>}
+                </FormItem>
+                
                 <p>What is your childs name?</p>
 
-                <Field type="text" name="childName" placeholder="Child's Name" />
-                {touched.childName && errors.childName && <p>{errors.childName}</p>}
-
+                <FormItem>
+                    <Field type="text" name="childName" placeholder="Child's Name" />
+                    {touched.childName && errors.childName && <FormError>{errors.childName}</FormError>}
+                </FormItem>
+        
                 <button type="submit">Submit</button>
 
             </Form>
             
-        </div>
+        </FormContainer>
     );
 }
 
 const SignUp = withFormik({
-    mapPropsToValues({name, password, ckPassword, childName}){
+    mapPropsToValues({username, password, ckPassword, childName}){
         return{
-            name: name || "",
+            username: username || "",
             password: password || "",
             childName: childName || "",
             ckPassword: ckPassword || "", 
@@ -45,7 +52,7 @@ const SignUp = withFormik({
     },
 
     validationSchema: Yup.object().shape({
-        name: Yup
+        username: Yup
         .string()
         .required("User Name is required"),
         
