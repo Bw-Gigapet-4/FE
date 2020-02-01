@@ -1,8 +1,10 @@
 import React from "react";
 import { withFormik, Form, Field } from 'formik';
 import * as Yup from 'yup';
+import axios from "axios";
 
 const SignUpFields =({ errors, touched })=>{
+    
     return(
         <div>
             <Form>
@@ -31,11 +33,12 @@ const SignUpFields =({ errors, touched })=>{
 }
 
 const SignUp = withFormik({
-    mapPropsToValues({name, password, childName}){
+    mapPropsToValues({name, password, ckPassword, childName}){
         return{
             name: name || "",
             password: password || "",
             childName: childName || "",
+            ckPassword: ckPassword || "", 
         };
     },
 
@@ -53,17 +56,27 @@ const SignUp = withFormik({
         .string()
         .required("You must re-enter your password")
         .oneOf([Yup.ref("password"),null], "Passwords must match."),
-        // .test("Passwords match.", "Passwords must match.", function(value){
-        //     return this.parent.password === value;
-        // }),
-
+        
         childName: Yup
         .string()
         .required("Child Name is required"),
     }),
 
     handleSubmit(values){
+        delete values.ckPassword;
         console.log("submit from signUp", values);
+
+        // axios
+        //     .post("", values)
+        //     .then(result => {
+        //         console.log("Post success", result);
+                
+        //     })
+        //     .catch(error =>{
+        //         console.log("Post Error", error.response);
+        //     });
+
+
     }
 
 })(SignUpFields);
