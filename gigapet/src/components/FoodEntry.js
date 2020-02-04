@@ -16,7 +16,7 @@ const FoodFields = ({ errors, touched} )=>{
                         {touched.date && errors.date && <FormError>{errors.date}</FormError>}
                     </div>
                     <div>
-                        <Field as="select" name="food" >
+                        <Field as="select" name="category" >
                         <option value="none">Choose an Option</option>
                         <option value="fruits">Fruits</option>
                         <option value="vegetables">Vegetables</option>
@@ -26,6 +26,10 @@ const FoodFields = ({ errors, touched} )=>{
                         <option value="fats">Fats and Oils</option>
                         <option value="treats">Treats</option>
                         </Field>
+                        {touched.food && errors.food && <FormError>{errors.food}</FormError>}
+                    </div>
+                    <div>
+                        <Field type="text" name="food" placeholder="Food"/>
                         {touched.food && errors.food && <FormError>{errors.food}</FormError>}
                     </div>
                     <div>
@@ -44,11 +48,12 @@ const FoodFields = ({ errors, touched} )=>{
 }
 
 const FoodEntry = withFormik({
-    mapPropsToValues({date, food, portions}){
+    mapPropsToValues({date, category, food, portions}){
         return{
             date: date || "",
-            food: food || "",
+            category: category || "",
             portions: portions || "",
+            food: food || "",
         };
     },
 
@@ -57,15 +62,18 @@ const FoodEntry = withFormik({
         .date()
         .required("Please select a date."),
 
-        food: Yup
+        category: Yup
         .string()
         .notOneOf(["none"])
         .required("You must choose a food item."),
         
-
         portions: Yup
         .number("Entry must be a number.")
         .required("Portion/Servings is required"),
+
+        food: Yup
+        .string()
+        .required("Food is required"),
     }),
 
     // insert resetForm  when axios call is completed

@@ -26,12 +26,12 @@ const SignUpFields =({ errors, touched })=>{
                     {touched.ckPassword && errors.ckPassword && <FormError>{errors.ckPassword}</FormError>}
                 </FormItem>
                 
-                <p>What is your childs name?</p>
+                {/* <p>What is your childs name?</p>
 
                 <FormItem>
                     <Field type="text" name="childName" placeholder="Child's Name" />
                     {touched.childName && errors.childName && <FormError>{errors.childName}</FormError>}
-                </FormItem>
+                </FormItem> */}
         
                 <button type="submit">Submit</button>
 
@@ -42,11 +42,10 @@ const SignUpFields =({ errors, touched })=>{
 }
 
 const SignUp = withFormik({
-    mapPropsToValues({username, password, ckPassword, childName}){
+    mapPropsToValues({username, password, ckPassword,}){
         return{
             username: username || "",
             password: password || "",
-            childName: childName || "",
             ckPassword: ckPassword || "", 
         };
     },
@@ -66,9 +65,9 @@ const SignUp = withFormik({
         .required("You must re-enter your password")
         .oneOf([Yup.ref("password"),null], "Passwords must match."),
         
-        childName: Yup
-        .string()
-        .required("Child Name is required"),
+        // childName: Yup
+        // .string()
+        // .required("Child Name is required"),
     }),
 
     handleSubmit(values){
