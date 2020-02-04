@@ -4,26 +4,26 @@ import * as Yup from 'yup';
 import axios from "axios";
 import { FormFood, FormError, FoodFormLable  } from "../styles"
 
-const FoodFields = ({ errors, touched} )=>{
+const FoodFields = ({ id, errors, touched})=>{
     return(
         <div>
             <Form>
                 <FormFood>
                     <FoodFormLable >Add a food entry</FoodFormLable >
-
+                    <Field type="hidden" name="id" value={id}/>
                     <div>
                         <Field type="date" name="date" />
                         {touched.date && errors.date && <FormError>{errors.date}</FormError>}
                     </div>
                     <div>
                         <Field as="select" name="category" >
-                        <option value="none">Select a Category</option>
+                        <option value="none">Select a Catafory</option>
                         <option value="fruits">Fruits</option>
                         <option value="vegetables">Vegetables</option>
                         <option value="grains">Whole Grains</option>
                         <option value="meat">Meat</option>
                         <option value="dairy">Dairy</option>
-                        <option value="fats">Fats and Oils</option>
+                        <option value="fats">Fat's and Oil's</option>
                         <option value="treats">Treats</option>
                         </Field>
                         {touched.food && errors.food && <FormError>{errors.food}</FormError>}
@@ -48,8 +48,9 @@ const FoodFields = ({ errors, touched} )=>{
 }
 
 const FoodEntry = withFormik({
-    mapPropsToValues({date, category, food, portions}){
+    mapPropsToValues({id, date, category, food, portions}){
         return{
+            id: id || "",
             date: date || "",
             category: category || "",
             portions: portions || "",

@@ -25,21 +25,21 @@ export const login = (credentials, history) => {
     }
 }
 
-// export const register = (newUser, history) => {
-//     dispatch => {
-//         dispatch({ type: SIGNUP_START });
+export const register = (newUser, history) => {
+    return dispatch => {
+        dispatch({ type: SIGNUP_START });
 
-//         axios().post('/signup', newUser)
-//             .then(res => {
-//                 console.log(res)
-//                 dispatch({ type: SIGNUP_SUCCESS, payload: res.data.user });
-//                 if (history && history.goBack){
-//                     history.goBack();
-//                 }
-//             })
-//             .catch(err => {
-//                 console.log(err.response)
-//                 dispatch({ type: SIGNUP_FAIL, payload: err.response })
-//             })
-//     }
-// }
+        axios().post('/signup', newUser)
+            .then(res => {
+                console.log(res)
+                dispatch({ type: SIGNUP_SUCCESS, payload: res.data.user });
+                if (history && history.goBack){
+                    history.goBack();
+                }
+            })
+            .catch(err => {
+                console.log(err.response)
+                dispatch({ type: SIGNUP_FAIL, payload: err.response })
+            })
+    }
+}
