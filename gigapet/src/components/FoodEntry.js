@@ -17,7 +17,7 @@ const FoodFields = ({ errors, touched} )=>{
                     </div>
                     <div>
                         <Field as="select" name="category" >
-                        <option value="none">Choose an Option</option>
+                        <option value="none">Select a Category</option>
                         <option value="fruits">Fruits</option>
                         <option value="vegetables">Vegetables</option>
                         <option value="grains">Whole Grains</option>

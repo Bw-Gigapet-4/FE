@@ -4,6 +4,7 @@ import { BrowserRouter as Router } from 'react-router-dom';
 
 // components
 import App from './App';
+import { BrowserRouter as Router } from "react-router-dom";
 
 // Redux-store setup
 import { createStore, applyMiddleware } from 'redux';

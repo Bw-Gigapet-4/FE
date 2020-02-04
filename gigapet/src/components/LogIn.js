@@ -3,6 +3,7 @@ import { withFormik, Form, Field } from 'formik';
 import * as Yup from 'yup';
 import axios from "axios";
 import {FormContainer, FormItem, FormError} from "../styles";
+import { Link } from 'react-router-dom';
 
 const FormFields = ({errors, touched}) =>{
     
@@ -23,8 +24,10 @@ const FormFields = ({errors, touched}) =>{
                     <button type="submit">Log In</button>
                 </div>
                 <p>Don't have an account?</p>
-                {/* wrap this sign up button to a route link when routes are assigned */}
-                <button>Sign Up</button>
+                <Link to={"/signup/"}>
+                    <button>Sign Up</button>
+                </Link>
+                
             </Form>
 
         </FormContainer>
