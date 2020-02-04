@@ -1,14 +1,20 @@
 import React from 'react';
+import { FormFood } from '../styles';
 
 export default function EditEntry(props){
     return(
-        <div>
-            <p>{props.date}</p> 
-            <p>{props.catagory}</p>
-            <p>{props.food}</p>
-            <p>{props.serving}</p>
-            <button>Edit</button>
-            <button>Delete</button>
-        </div>
+        <FormFood>
+            <p>Date: {props.date}</p> 
+            <p>Catagory: {props.catagory}</p>
+            <p>Food: {props.food}</p>
+            <p>Serving: {props.serving}</p>
+            <div>
+               <button>Edit</button> 
+            </div>
+            <div>
+                <button>Delete</button> 
+            </div>
+           
+        </FormFood>
     );
 }
