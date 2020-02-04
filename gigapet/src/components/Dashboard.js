@@ -4,7 +4,7 @@ import EditEntry from './EditEntry';
 import { DashContainer, DashNav } from '../styles'
 import {Link, Route} from 'react-router-dom'; 
 import  axios from 'axios';
-import CatagoryInfo from './CatagoryInfo';
+import CategoryInfo from './CategoryInfo';
 
 
 export default function Dashboard(){
@@ -44,37 +44,37 @@ export default function Dashboard(){
                 
                 <Route 
                 exact path ="/dashboard/" 
-                render={props => <CatagoryInfo {...props} catagory="fruits" title ="fruit" data={foodData}/>}
+                render={props => <CategoryInfo {...props} category="fruits" title ="fruit" data={foodData}/>}
                 />
 
                 <Route 
                 exact path ="/dashboard/vegetables/" 
-                render={props => <CatagoryInfo {...props} catagory="vegtables" title="vegtable" data={foodData}/>}
+                render={props => <CategoryInfo {...props} category="vegtables" title="vegtable" data={foodData}/>}
                 />
 
                 <Route 
                 exact path ="/dashboard/grains" 
-                render={props => <CatagoryInfo {...props} catagory="grains" title="whole grain" data={foodData}/>}
+                render={props => <CategoryInfo {...props} category="grains" title="whole grain" data={foodData}/>}
                 />
 
                 <Route 
                 exact path ="/dashboard/meat" 
-                render={props => <CatagoryInfo {...props} catagory="meat" title="meat" data={foodData}/>}
+                render={props => <CategoryInfo {...props} category="meat" title="meat" data={foodData}/>}
                 />
 
                 <Route 
                 exact path ="/dashboard/dairy" 
-                render={props => <CatagoryInfo {...props} catagory="dairy" title="dairy" data={foodData}/>}
+                render={props => <CategoryInfo {...props} category="dairy" title="dairy" data={foodData}/>}
                 />
 
                 <Route 
                 exact path ="/dashboard/fats" 
-                render={props => <CatagoryInfo {...props} catagory="fats" title="fats and oils" data={foodData}/>}
+                render={props => <CategoryInfo {...props} category="fats" title="fats and oils" data={foodData}/>}
                 />
 
                 <Route 
                 exact path ="/dashboard/treats" 
-                render={props => <CatagoryInfo {...props} catagory="treats" title="treat" data={foodData}/>}
+                render={props => <CategoryInfo {...props} category="treats" title="treat" data={foodData}/>}
                 />
 
 

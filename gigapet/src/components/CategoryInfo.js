@@ -1,7 +1,7 @@
 import React from 'react';
 import { DisplayFlex, DisplayBox } from '../styles';
 
-export default function(props){
+export default function CategoryInfo(props){
     return(
         <DisplayFlex>
             <DisplayBox>
