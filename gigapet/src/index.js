@@ -4,7 +4,7 @@ import { BrowserRouter as Router } from 'react-router-dom';
 
 // components
 import App from './App';
-import { BrowserRouter as Router } from "react-router-dom";
+
 
 // Redux-store setup
 import { createStore, applyMiddleware } from 'redux';
@@ -16,8 +16,10 @@ const store = createStore(reducer, applyMiddleware(thunk));
 
 
 ReactDOM.render(
-    <Provider store={store}>
-        <App />
-    </Provider>, 
+    <Router>
+        <Provider store={store}>
+            <App />
+        </Provider>
+    </Router>, 
 document.getElementById('root'));
 

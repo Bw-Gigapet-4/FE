@@ -7,7 +7,7 @@ export default function Dashboard(){
 
     useEffect(()=>{
         axios
-        .get(`https://gigapetapi.herokuapp.com/api/food/1`)
+        .get(`food/1/`)
         .then(result =>{
             console.log("api result",result)
         })
