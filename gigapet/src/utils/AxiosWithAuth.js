@@ -14,7 +14,7 @@ export function clearToken () {
 
 export const AxiosWithAuth = () => {
     return axios.create({
-        // baseURL: "",
+        baseURL: "https://gigapetapi.herokuapp.com/api/",
         headers: {
             'Content-Type': 'application/json',
             'Authorization': getToken()
