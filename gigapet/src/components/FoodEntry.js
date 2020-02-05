@@ -1,7 +1,7 @@
 import React from "react";
 import { withFormik, Form, Field } from 'formik';
 import * as Yup from 'yup';
-import axios from "axios";
+//import axios from "axios";
 import { FormFood, FormError, FoodFormLable  } from "../styles"
 
 const FoodFields = ({ id, errors, touched})=>{
@@ -81,15 +81,6 @@ const FoodEntry = withFormik({
     handleSubmit(values){
         console.log("submit from FoodEntry", values);
 
-        // axios
-        //     .post("", values)
-        //     .then(result => {
-        //         console.log("Post success", result);
-                
-        //     })
-        //     .catch(error =>{
-        //         console.log("Post Error", error.response);
-        //     });
 
     }
 

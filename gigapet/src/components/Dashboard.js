@@ -3,7 +3,7 @@ import FoodEntry from './FoodEntry';
 import EditEntry from './EditEntry';
 import { DashContainer, DashNav } from '../styles'
 import {Link, Route} from 'react-router-dom'; 
-import  axios from 'axios';
+//import  axios from 'axios';
 import CategoryInfo from './CategoryInfo';
 
 
@@ -37,9 +37,7 @@ export default function Dashboard(){
                     <Link to="/dashboard/meat/">Meats</Link>
                     <Link to="/dashboard/dairy/">Dairy</Link>
                     <Link to="/dashboard/fats/">Fat's and Oil's</Link>
-                    <Link to="/dashboard/treats/">Treats</Link>
-                    
-                    
+                    <Link to="/dashboard/treats/">Treats</Link>    
                 </DashNav>
                 
                 <Route 

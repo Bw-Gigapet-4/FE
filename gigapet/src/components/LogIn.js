@@ -1,11 +1,13 @@
 import React from 'react';
 import { withFormik, Form, Field } from 'formik';
 import * as Yup from 'yup';
-import axios from "axios";
+import { AxiosWithAuth as axios } from '../utils/AxiosWithAuth';
+import { connect } from 'react-redux';
 import {FormContainer, FormItem, FormError} from "../styles";
 import { Link } from 'react-router-dom';
+import { login } from '../store/actions/action';
 
-const FormFields = ({errors, touched}) =>{
+const LogIn = ({errors, touched}) =>{
     
     
     return(
@@ -34,7 +36,13 @@ const FormFields = ({errors, touched}) =>{
     );
 }
 
-const LogIn = withFormik({
+const mapStateToProps = (state) =>{
+    return {...state.auth};
+}
+
+const mapDispatchToProps = {login};
+
+export default connect(mapStateToProps, mapDispatchToProps)(withFormik({
     mapPropsToValues({name, password}){
         return{
             username: name || "",
@@ -53,20 +61,10 @@ const LogIn = withFormik({
         .required("Password is Required"),
     }),
 
-    handleSubmit(values){
-        console.log("values from submit", values);
+    handleSubmit({username, password, history}){
+        console.log("values from submit", {username, password, login});
 
-        // axios
-        //     .post("", values)
-        //     .then(result => {
-        //         console.log("Post success", result);
-                
-        //     })
-        //     .catch(error =>{
-        //         console.log("Post Error", error.response);
-        //     });
+        login({username, password}, history);
     }
 
-})(FormFields);
-
-export default LogIn;
+})(LogIn));

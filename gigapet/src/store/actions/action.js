@@ -11,12 +11,12 @@ export const SIGNUP_FAIL = "SIGNUP_FAIL";
 export const login = (credentials, history) => {
     return dispatch => {
         dispatch({ type: LOGIN_START });
-
+        
         axios().post('/login', credentials)
             .then(res => {
                 dispatch({ type: LOGIN_SUCCESS, payload: res.data.user });
                 setToken(res.data.token);
-                history.push('/')
+                history.push('/dashboard/')
             })
             .catch(err => {
                 console.log(err.response)

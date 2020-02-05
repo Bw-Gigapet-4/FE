@@ -12,7 +12,7 @@ export const Initial_State = {
 }
 
 export const reducer = (state = Initial_State, action) => {
-    // console.log(action.type)
+    console.log(action.type)
     switch (action.type) {
         case LOGIN_START: 
             return { 

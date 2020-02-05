@@ -1,7 +1,7 @@
 import React from "react";
 import { withFormik, Form, Field } from 'formik';
 import * as Yup from 'yup';
-import axios from "axios";
+//import axios from "axios";
 import {FormContainer, FormItem, FormError} from "../styles";
 
 
@@ -64,19 +64,6 @@ const SignUp = withFormik({
         //removes ckPassword field so only values needed get sent.
         delete values.ckPassword;
         console.log("submit from signUp", values);
-
-        // axios
-        //     .post("", values)
-        //     .then(result => {
-        //         console.log("Post success", result);
-                
-        //     })
-        //     .catch(error =>{
-        //         console.log("Post Error", error.response);
-        //     });
-
-    
-    
 
     }
 
