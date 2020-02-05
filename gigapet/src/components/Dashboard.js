@@ -27,7 +27,13 @@ export default function Dashboard(){
     return (
         <div>
             <h1>Welcome 'usernamehere'</h1>
-            <FoodEntry id={"user id here"}/> 
+            <FoodEntry id={"user id here"}/>
+            
+            {/* set id instead of 1 in to field below */}
+            <div>
+                <Link to="/history/1">History</Link>
+            </div>
+             
 
             <DashContainer>
                 <DashNav>
@@ -77,10 +83,7 @@ export default function Dashboard(){
 
 
             </DashContainer>
-
-            <h4>History</h4>
-            {/* map through items with EditEntry */}
-            <EditEntry/>
+            
         </div>
     );
 }

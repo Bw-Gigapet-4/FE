@@ -3,6 +3,7 @@ import './App.css';
 import LogIn from './components/LogIn';
 import SignUp from './components/SignUp';
 import Dashboard from './components/Dashboard';
+import History from './components/History';
 import { Route } from 'react-router-dom';
 
 function App() {
@@ -11,7 +12,10 @@ function App() {
       <Route exact path="/login" component={LogIn} />
       <Route path="/signup/" component={SignUp} />
 
+      {/* Routes below should be protected */}
+
       <Route path="/dashboard/" component={Dashboard} />
+      <Route path="/history/:id" component={History} />
     </div>
   );
 }

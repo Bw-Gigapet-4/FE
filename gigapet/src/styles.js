@@ -28,6 +28,8 @@ const FormFood = styled.div`
     max-width: 800px;
     height: 60px;
     margin 10px auto;
+
+    ${props => (props.type === 'small' ? `height: 40px; margin: 5px auto;`: null )}
 `;
 
 const FoodFormLable = styled.p`

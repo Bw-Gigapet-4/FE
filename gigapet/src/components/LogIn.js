@@ -16,25 +16,29 @@ const LogIn = ({errors, touched, login}) =>{
                 <h1>Log In</h1>
                 <FormItem>
                     <Field type="text" name="username" placeholder="User Name" />
-                    {touched.name && errors.name && <FormError>{errors.name}</FormError>}
+                    {touched.username && errors.username && <FormError>{errors.username}</FormError>}
                 </FormItem>
                 <FormItem>
                     <Field type="password" name="password" placeholder="Password" />
                     {touched.password && errors.password && <FormError>{errors.password}</FormError>}
                 </FormItem>
                 <div>
-                    <button type="submit" onClick={login}>Log In</button>
+                     <button type="submit" onClick={login}>Log In</button> 
                 </div>
+                
                 <p>Don't have an account?</p>
                 <Link to={"/signup/"}>
                     <button>Sign Up</button>
                 </Link>
                 
             </Form>
-
+            
+            
         </FormContainer>
     );
 }
+
+//
 
 const mapStateToProps = (state) =>{
     return {...state.auth};
@@ -43,10 +47,10 @@ const mapStateToProps = (state) =>{
 const mapDispatchToProps = {login};
 
 export default connect(mapStateToProps, mapDispatchToProps)(withFormik({
-    mapPropsToValues({name, password}){
+    mapPropsToValues({username, password}){
         return{
-            username: name,
-            password: password,
+            username: username || "",
+            password: password || "",
         }      
     },
 
@@ -65,6 +69,8 @@ export default connect(mapStateToProps, mapDispatchToProps)(withFormik({
         console.log("values from submit", {username, password, login});
 
         login({username, password}, history);
+
+        
     }
 
 })(LogIn));
