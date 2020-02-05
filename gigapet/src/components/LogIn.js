@@ -7,7 +7,7 @@ import {FormContainer, FormItem, FormError} from "../styles";
 import { Link } from 'react-router-dom';
 import { login } from '../store/actions/action';
 
-const LogIn = ({errors, touched}) =>{
+const LogIn = ({errors, touched, login}) =>{
     
     
     return(
@@ -23,7 +23,7 @@ const LogIn = ({errors, touched}) =>{
                     {touched.password && errors.password && <FormError>{errors.password}</FormError>}
                 </FormItem>
                 <div>
-                    <button type="submit">Log In</button>
+                    <button type="submit" onClick={login}>Log In</button>
                 </div>
                 <p>Don't have an account?</p>
                 <Link to={"/signup/"}>
@@ -45,8 +45,8 @@ const mapDispatchToProps = {login};
 export default connect(mapStateToProps, mapDispatchToProps)(withFormik({
     mapPropsToValues({name, password}){
         return{
-            username: name || "",
-            password: password || "",
+            username: name,
+            password: password,
         }      
     },
 
