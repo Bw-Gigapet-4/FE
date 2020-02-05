@@ -1,5 +1,6 @@
 import { AxiosWithAuth as axios, setToken} from '../../utils/AxiosWithAuth';
 
+// action types for login/register
 export const LOGIN_START = "LOGIN_START";
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
 export const LOGIN_FAIL = "LOGIN_FAIL";
@@ -7,6 +8,18 @@ export const LOGIN_FAIL = "LOGIN_FAIL";
 export const SIGNUP_START = "SIGNUP_START";
 export const SIGNUP_SUCCESS = "SIGNUP_SUCCESS";
 export const SIGNUP_FAIL = "SIGNUP_FAIL";
+
+// action types for crud operations
+export const FETCH_START = "FETCH_START";
+export const FETCH_SUCCESS = "FETCH_SUCCESS";
+export const FETCH_FAIL = "FETCH_FAIL";
+
+export const UPDATE_START = "UPDATE_START";
+export const UPDATE_SUCCESS = "UPDATE_SUCCESS";
+export const UPDATE_FAIL = "UPDATE_FAIL";
+
+export const DELETE = "DELETE";
+
 
 export const login = (credentials, history) => {
     return dispatch => {
