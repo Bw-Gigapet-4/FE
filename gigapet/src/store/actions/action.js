@@ -27,12 +27,13 @@ export const login = (credentials, history) => {
         
         axios().post('/login', credentials)
             .then(res => {
+                console.log("Working", res)
                 dispatch({ type: LOGIN_SUCCESS, payload: res.data.user });
                 setToken(res.data.token);
                 history.push('/dashboard/')
             })
             .catch(err => {
-                console.log(err.response)
+                console.log("Failing", err.response)
                 dispatch({ type: LOGIN_FAIL, payload: err.response });
             })
     }
