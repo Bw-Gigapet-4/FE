@@ -2,18 +2,23 @@ import React, { useState, useEffect } from 'react';
 import FoodEntry from './FoodEntry';
 import { DashContainer, DashNav } from '../styles'
 import {Link, Route} from 'react-router-dom'; 
-//import  axios from 'axios';
+//import  {AxiosWithAuth as axios} from '../utils/AxiosWithAuth';
 import CategoryInfo from './CategoryInfo';
 import NavBar from './NavBar';
 
+import { connect } from 'react-redux';
 
-export default function Dashboard(){
+const mapStateToProps = state => ({userid: state.user.id, username: state.user.username});
+
+function Dashboard({userid, username}){
+
+    console.log(userid, username);
    
     // get food data and set to state
     const {foodData, setFoodData} = useState([]);
 
     useEffect(()=>{
-        // axios
+        // axios()
         // .get('')
         // .then(result =>{
         //     console.log("api result",result)
@@ -26,11 +31,11 @@ export default function Dashboard(){
 
     return (
         <div>
-            {/* set user id instead of 1 in to id field below */}
-            <NavBar page="dash" id="1"/>
+            
+            <NavBar page="dash" id={userid}/>
 
-            <h1>Welcome 'usernamehere'</h1>
-            <FoodEntry id={"user id here"}/>
+            <h1>Welcome { username }</h1>
+            <FoodEntry id={userid}/>
             
             <DashContainer>
                 <DashNav>
@@ -84,3 +89,5 @@ export default function Dashboard(){
         </div>
     );
 }
+
+export default connect(mapStateToProps)(Dashboard);

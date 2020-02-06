@@ -1,21 +1,19 @@
 import React from "react";
 import { withFormik, Form, Field } from 'formik';
 import * as Yup from 'yup';
-//import axios from "axios";
 import { FormFood, FormError, FoodFormLable  } from "../styles"
-import { Link } from 'react-router-dom';
 
-const EditForm = ({ match, errors, touched})=>{
-    let userid = match.params.uid;
-    let id = match.params.iid;
 
+
+const EditForm = ({ userid, itemid, errors, touched})=>{
+    //console.log(userid, itemid);
     return(
         <div>
             <Form>
-                <FormFood type="small">
+                <FormFood>
                     <FoodFormLable >Edit food entry</FoodFormLable >
-                    <Field type="hidden" name="id" value={userid}/>
-                    <Field type="hidden" name="item" value={id}/>
+                    <Field type="hidden" name="userid" value={userid}/>
+                    <Field type="hidden" name="itemid" value={itemid}/>
                     <div>
                         <Field type="date" name="date" />
                         {touched.date && errors.date && <FormError>{errors.date}</FormError>}
@@ -42,13 +40,7 @@ const EditForm = ({ match, errors, touched})=>{
                         {touched.portions && errors.portions && <FormError>{errors.portions}</FormError>}
                     </div>
                     <div>
-                       <button type="submit">Edit Entry</button> 
-                    </div>
-                    <div>
-                        <Link to={`/history/${id}`} >
-                            <button >x</button> 
-                        </Link>
-                       
+                       <button type="submit">Add an Entry</button> 
                     </div>
                     
                 </FormFood>
@@ -58,11 +50,11 @@ const EditForm = ({ match, errors, touched})=>{
     );
 }
 
-const EditForms = withFormik({
-    mapPropsToValues({userid, id, date, category, food, portions}){
+const FormikEditForm = withFormik({
+    mapPropsToValues({userid, itemid, date, category, food, portions}){
         return{
-            userid: userid || "", 
-            id: id || "", // item id 
+            userid: userid || "",
+            id: itemid || "",
             date: date || "",
             category: category || "",
             portions: portions || "",
@@ -91,11 +83,11 @@ const EditForms = withFormik({
 
     
     handleSubmit(values){
-        console.log("submit from FoodEntry", values);
-
+        console.log("submit from editform", values);
+        
 
     }
 
 })(EditForm);
 
-export default EditForms;
+export default FormikEditForm;

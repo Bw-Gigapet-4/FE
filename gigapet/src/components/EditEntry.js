@@ -1,10 +1,12 @@
-import React, { useState }  from 'react';
+import React from 'react';
 import { FormFood } from '../styles';
-import { Link, Route} from 'react-router-dom';
-import EditForms from './EditForm';
+
+
+
+
 
 export default function EditEntry(props){
-    
+    //console.log(props);
 
     return(
         <div>
@@ -14,9 +16,7 @@ export default function EditEntry(props){
                 <p>Food: {props.food}</p>
                 <p>Serving: {props.serving}</p>
                 <div>
-                    <Link to={`/history/${props.userId}/${props.itemId}`}>
-                        <button>Edit</button>
-                    </Link> 
+                    <button onClick={()=>props.fn(props.itemId)}>Edit</button>
                 </div>
                 <div>
                     <button>Delete</button> 
@@ -24,7 +24,6 @@ export default function EditEntry(props){
                 
             </FormFood>
 
-            {/* <Route exact path="/history/:uid/:iid" component={EditForms}/> */}
         </div>
         
     );
