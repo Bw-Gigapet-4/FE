@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import FoodEntry from './FoodEntry';
-import EditEntry from './EditEntry';
 import { DashContainer, DashNav } from '../styles'
 import {Link, Route} from 'react-router-dom'; 
 //import  axios from 'axios';
 import CategoryInfo from './CategoryInfo';
+import NavBar from './NavBar';
 
 
 export default function Dashboard(){
-
+   
     // get food data and set to state
     const {foodData, setFoodData} = useState([]);
 
@@ -26,15 +26,12 @@ export default function Dashboard(){
 
     return (
         <div>
+            {/* set user id instead of 1 in to id field below */}
+            <NavBar page="dash" id="1"/>
+
             <h1>Welcome 'usernamehere'</h1>
             <FoodEntry id={"user id here"}/>
             
-            {/* set id instead of 1 in to field below */}
-            <div>
-                <Link to="/history/1">History</Link>
-            </div>
-             
-
             <DashContainer>
                 <DashNav>
                     <Link to="/dashboard/">Fruits</Link>
