@@ -5,12 +5,12 @@ import { FormFood, FormError, FoodFormLable  } from "../styles"
 
 
 
-const EditForm = ({ userid, itemid, errors, touched})=>{
+const EditForm = ({ fn, userid, itemid, errors, touched})=>{
     //console.log(userid, itemid);
     return(
         <div>
             <Form>
-                <FormFood>
+                <FormFood type="small">
                     <FoodFormLable >Edit food entry</FoodFormLable >
                     <Field type="hidden" name="userid" value={userid}/>
                     <Field type="hidden" name="itemid" value={itemid}/>
@@ -41,6 +41,9 @@ const EditForm = ({ userid, itemid, errors, touched})=>{
                     </div>
                     <div>
                        <button type="submit">Add an Entry</button> 
+                    </div>
+                    <div>
+                    <button onClick={fn}>x</button> 
                     </div>
                     
                 </FormFood>

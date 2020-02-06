@@ -10,6 +10,7 @@ import NavBar from './NavBar';
 export default function History(props){
     const [formShow, setFormShow] = useState(false);
     const [itemId, setItemId] = useState('');
+    const [history, setHistory] = useState([]);
 
     let id = props.match.params.id;
     
@@ -18,13 +19,17 @@ export default function History(props){
         setItemId(x);
     };
 
+    const removeForm = ()=>{
+        setFormShow(false);
+    };
+
     useEffect(()=>{
         //axios call here passing in id as user id
         // axios()
         // .get('')
         // .then(result =>{
         //     console.log("api result",result)
-        //     setFoodData("path to data")
+        //     setHistory(result.pathtodata)
         // })
         // .catch(error =>{
         //     console.log(error.response);
@@ -37,7 +42,7 @@ export default function History(props){
         <div>
             <NavBar />
             <h2>History</h2>
-            {formShow === true ? <EditForm userid={id} itemid={itemId} /> : null}
+            {formShow === true ? <EditForm userid={id} itemid={itemId} fn={removeForm}/> : null}
             
             {/* map through items with EditEntry and set up props accordingly*/}
             <EditEntry 

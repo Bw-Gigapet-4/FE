@@ -10,7 +10,7 @@ function App() {
   
   return (
     <div className="App">
-      <Route exact path="/login" component={LogIn} />
+      <Route exact path="/" component={LogIn} />
       <Route path="/signup/" component={SignUp} />
 
       {/* Routes below should be protected */}

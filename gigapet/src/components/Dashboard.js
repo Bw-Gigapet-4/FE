@@ -22,7 +22,7 @@ function Dashboard({userid, username}){
         // .get('')
         // .then(result =>{
         //     console.log("api result",result)
-        //     setFoodData("path to data")
+        //     setFoodData("result.pathtodata")
         // })
         // .catch(error =>{
         //     console.log(error.response);
