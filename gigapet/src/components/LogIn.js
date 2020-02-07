@@ -16,7 +16,7 @@ const LogIn = ({errors, touched, login}) =>{
                 <h1>Log In</h1>
                 <FormItem>
                     <Field type="text" name="username" placeholder="User Name" />
-                    {touched.name && errors.name && <FormError>{errors.name}</FormError>}
+                    {touched.username && errors.username && <FormError>{errors.name}</FormError>}
                 </FormItem>
                 <FormItem>
                     <Field type="password" name="password" placeholder="Password" />
@@ -43,9 +43,9 @@ const mapStateToProps = (state) =>{
 const mapDispatchToProps = {login};
 
 export default connect(mapStateToProps, mapDispatchToProps)(withFormik({
-    mapPropsToValues({name, password}){
+    mapPropsToValues({username, password}){
         return{
-            username: name,
+            username: username,
             password: password,
         }      
     },
