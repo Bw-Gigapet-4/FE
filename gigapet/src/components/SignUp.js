@@ -1,11 +1,13 @@
 import React from "react";
 import { withFormik, Form, Field } from 'formik';
 import * as Yup from 'yup';
+import { connect } from 'react-redux';
+import { register } from '../store/actions/action';
 //import axios from "axios";
 import {FormContainer, FormItem, FormError} from "../styles";
 
 
-const SignUpFields =({ errors, touched })=>{
+const SignUp =({ errors, touched })=>{
 
     
     return(
@@ -25,7 +27,7 @@ const SignUpFields =({ errors, touched })=>{
                     <Field type="password" name="ckPassword" placeholder="Re-Enter Password" />          
                     {touched.ckPassword && errors.ckPassword && <FormError>{errors.ckPassword}</FormError>}
                 </FormItem>
-      
+
                 <button type="submit">Submit</button>
 
             </Form>
@@ -34,12 +36,18 @@ const SignUpFields =({ errors, touched })=>{
     );
 }
 
-const SignUp = withFormik({
-    mapPropsToValues({username, password, ckPassword,}){
+const mapStateToProps = (state) => {
+    return {
+        ...state.auth
+    }
+}
+
+const SignUpWithFormik = withFormik({
+    mapPropsToValues({username, password, ckPassword}){
         return{
             username: username || "",
             password: password || "",
-            ckPassword: ckPassword || "", 
+            ckPassword: ckPassword || ""
         };
     },
 
@@ -60,13 +68,13 @@ const SignUp = withFormik({
         
     }),
 
-    handleSubmit(values){
+    handleSubmit: ({history, ...values}, formikBag) => {
         //removes ckPassword field so only values needed get sent.
         delete values.ckPassword;
         console.log("submit from signUp", values);
-
+        formikBag.props.register(values, history)
     }
 
-})(SignUpFields);
+})(SignUp);
 
-export default SignUp;
+export default connect(mapStateToProps, { register })(SignUpWithFormik);
