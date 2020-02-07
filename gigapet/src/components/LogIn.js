@@ -23,18 +23,22 @@ const LogIn = ({errors, touched, login}) =>{
                     {touched.password && errors.password && <FormError>{errors.password}</FormError>}
                 </FormItem>
                 <div>
-                    <button type="submit" onClick={login}>Log In</button>
+                     <button type="submit" >Log In</button> 
                 </div>
+                
                 <p>Don't have an account?</p>
                 <Link to={"/signup/"}>
                     <button>Sign Up</button>
                 </Link>
                 
             </Form>
-
+            
+            
         </FormContainer>
     );
 }
+
+//
 
 const mapStateToProps = (state) =>{
     return {...state.auth};
@@ -68,3 +72,5 @@ export default connect(mapStateToProps, mapDispatchToProps)(withFormik({
     }
 
 })(LogIn));
+
+

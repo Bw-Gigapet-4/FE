@@ -28,6 +28,8 @@ const FormFood = styled.div`
     max-width: 800px;
     height: 60px;
     margin 10px auto;
+
+    ${props => (props.type === 'small' ? `height: 40px; margin: 5px auto;`: null )}
 `;
 
 const FoodFormLable = styled.p`
@@ -67,6 +69,17 @@ const DisplayBox = styled.div`
     border: 2px solid #a6a6a6;
     border-radius: 15px;
 `;
+
+const Nav = styled.nav`
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    height: 40px;
+    padding: 0px 80px;
+    background: #e6e6e6;
+    border-bottom: 3px solid #a6a6a6;
+`;
  
 export {
     FormContainer, 
@@ -77,6 +90,7 @@ export {
     DashContainer,
     DashNav,
     DisplayFlex,
-    DisplayBox, 
+    DisplayBox,
+    Nav, 
 
 }; 

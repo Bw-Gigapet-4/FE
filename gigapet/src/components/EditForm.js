@@ -1,16 +1,19 @@
 import React from "react";
 import { withFormik, Form, Field } from 'formik';
 import * as Yup from 'yup';
-//import axios from "axios";
 import { FormFood, FormError, FoodFormLable  } from "../styles"
 
-const FoodFields = ({ id, errors, touched})=>{
+
+
+const EditForm = ({ fn, userid, itemid, errors, touched})=>{
+    //console.log(userid, itemid);
     return(
         <div>
             <Form>
-                <FormFood>
-                    <FoodFormLable >Add a food entry</FoodFormLable >
-                    <Field type="hidden" name="id" value={id}/>
+                <FormFood type="small">
+                    <FoodFormLable >Edit food entry</FoodFormLable >
+                    <Field type="hidden" name="userid" value={userid}/>
+                    <Field type="hidden" name="itemid" value={itemid}/>
                     <div>
                         <Field type="date" name="date" />
                         {touched.date && errors.date && <FormError>{errors.date}</FormError>}
@@ -39,6 +42,9 @@ const FoodFields = ({ id, errors, touched})=>{
                     <div>
                        <button type="submit">Add an Entry</button> 
                     </div>
+                    <div>
+                    <button onClick={fn}>x</button> 
+                    </div>
                     
                 </FormFood>
             </Form>
@@ -47,10 +53,11 @@ const FoodFields = ({ id, errors, touched})=>{
     );
 }
 
-const FoodEntry = withFormik({
-    mapPropsToValues({id, date, category, food, portions}){
+const FormikEditForm = withFormik({
+    mapPropsToValues({userid, itemid, date, category, food, portions}){
         return{
-            id: id || "",
+            userid: userid || "",
+            id: itemid || "",
             date: date || "",
             category: category || "",
             portions: portions || "",
@@ -77,13 +84,13 @@ const FoodEntry = withFormik({
         .required("Food is required"),
     }),
 
-    // insert resetForm  when axios call is completed
+    
     handleSubmit(values){
-        console.log("submit from FoodEntry", values);
-
+        console.log("submit from editform", values);
+        
 
     }
 
-})(FoodFields);
+})(EditForm);
 
-export default FoodEntry;
+export default FormikEditForm;

@@ -1,23 +1,24 @@
 import React, { useState, useEffect } from 'react';
 import FoodEntry from './FoodEntry';
-import EditEntry from './EditEntry';
 import { DashContainer, DashNav } from '../styles'
 import {Link, Route} from 'react-router-dom'; 
-//import  axios from 'axios';
+//import  {AxiosWithAuth as axios} from '../utils/AxiosWithAuth';
 import CategoryInfo from './CategoryInfo';
+import NavBar from './NavBar';
 
+ 
 
-export default function Dashboard(){
+function Dashboard(){
 
     // get food data and set to state
     const {foodData, setFoodData} = useState([]);
 
     useEffect(()=>{
-        // axios
+        // axios()
         // .get('')
         // .then(result =>{
         //     console.log("api result",result)
-        //     setFoodData("path to data")
+        //     setFoodData("result.pathtodata")
         // })
         // .catch(error =>{
         //     console.log(error.response);
@@ -26,9 +27,12 @@ export default function Dashboard(){
 
     return (
         <div>
-            <h1>Welcome 'usernamehere'</h1>
-            <FoodEntry id={"user id here"}/> 
+            
+            <NavBar page="dash" id={"userid"}/>
 
+            <h1>Welcome { "username" }</h1>
+            <FoodEntry id={"userid"}/>
+            
             <DashContainer>
                 <DashNav>
                     <Link to="/dashboard/">Fruits</Link>
@@ -77,10 +81,10 @@ export default function Dashboard(){
 
 
             </DashContainer>
-
-            <h4>History</h4>
-            {/* map through items with EditEntry */}
-            <EditEntry/>
+            
         </div>
     );
 }
+
+
+export default Dashboard;
