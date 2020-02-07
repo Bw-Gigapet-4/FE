@@ -19,6 +19,7 @@ export const FETCH_FAIL = "FETCH_FAIL";
 export const UPDATE_START = "UPDATE_START";
 export const UPDATE_SUCCESS = "UPDATE_SUCCESS";
 export const UPDATE_FAIL = "UPDATE_FAIL";
+export const UPDATE_ERROR = "UPDATE_ERROR";
 
 export const DELETE = "DELETE";
 
@@ -73,6 +74,24 @@ export const updateFoodEntry = ({id, ...details}) => {
             .catch(err => {
                 console.log(err.response)
                 dispatch({ type: UPDATE_FAIL, payload: err.response})
+            })
+    }
+}
+
+// Delete Entry
+export const deleteEntry = (history, id) => {
+    return dispatch => {
+        console.log('history is here =>', history)
+        AxiosWithAuth().delete(`remove/${id}`)
+            .then(res => {
+                console.log(res.data)
+                dispatch({ type: DELETE, payload: res })
+                if(history && history.goBack) history.goBack();
+                console.log('history too', history)
+            })
+            .catch(err => {
+                console.log(err.response)
+                dispatch({ type: UPDATE_ERROR, payload: err.response})
             })
     }
 }
