@@ -61,10 +61,10 @@ export default connect(mapStateToProps, mapDispatchToProps)(withFormik({
         .required("Password is Required"),
     }),
 
-    handleSubmit({username, password, history}){
+    handleSubmit({username, password, history}, formikBag){
         console.log("values from submit", {username, password, login});
 
-        login({username, password}, history);
+        formikBag.props.login({username, password}, formikBag.props.history);
     }
 
 })(LogIn));

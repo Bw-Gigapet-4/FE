@@ -8,7 +8,6 @@ export const Initial_State = {
         username: ""
     },
     isAuthorizing: false,
-    isUpdating: false,
     error: NO_ERRORS
 }
 

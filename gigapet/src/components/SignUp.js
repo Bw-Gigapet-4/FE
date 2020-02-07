@@ -72,7 +72,7 @@ const SignUpWithFormik = withFormik({
         //removes ckPassword field so only values needed get sent.
         delete values.ckPassword;
         console.log("submit from signUp", values);
-        formikBag.props.register(values, history)
+        formikBag.props.register(values, formikBag.props.history)
     }
 
 })(SignUp);
