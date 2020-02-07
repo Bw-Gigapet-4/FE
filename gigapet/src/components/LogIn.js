@@ -23,7 +23,7 @@ const LogIn = ({errors, touched, login}) =>{
                     {touched.password && errors.password && <FormError>{errors.password}</FormError>}
                 </FormItem>
                 <div>
-                     <button type="submit" onClick={login}>Log In</button> 
+                     <button type="submit" >Log In</button> 
                 </div>
                 
                 <p>Don't have an account?</p>
@@ -65,12 +65,14 @@ export default connect(mapStateToProps, mapDispatchToProps)(withFormik({
         .required("Password is Required"),
     }),
 
-    handleSubmit({username, password, history}){
-        console.log("values from submit", {username, password, login});
+    handleSubmit({history, ...values}, formikBag){
+        console.log("values from submit", values);
 
-        login({username, password}, history);
+        formikBag.props.login(values, formikBag.props.history);
 
         
     }
 
 })(LogIn));
+
+

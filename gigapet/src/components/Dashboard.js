@@ -6,14 +6,10 @@ import {Link, Route} from 'react-router-dom';
 import CategoryInfo from './CategoryInfo';
 import NavBar from './NavBar';
 
-import { connect } from 'react-redux';
+ 
 
-const mapStateToProps = state => ({userid: state.user.id, username: state.user.username});
+function Dashboard(){
 
-function Dashboard({userid, username}){
-
-    console.log(userid, username);
-   
     // get food data and set to state
     const {foodData, setFoodData} = useState([]);
 
@@ -32,10 +28,10 @@ function Dashboard({userid, username}){
     return (
         <div>
             
-            <NavBar page="dash" id={userid}/>
+            <NavBar page="dash" id={"userid"}/>
 
-            <h1>Welcome { username }</h1>
-            <FoodEntry id={userid}/>
+            <h1>Welcome { "username" }</h1>
+            <FoodEntry id={"userid"}/>
             
             <DashContainer>
                 <DashNav>
@@ -90,4 +86,5 @@ function Dashboard({userid, username}){
     );
 }
 
-export default connect(mapStateToProps)(Dashboard);
+
+export default Dashboard;

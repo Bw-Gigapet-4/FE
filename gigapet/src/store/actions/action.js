@@ -30,6 +30,8 @@ export const login = (credentials, history) => {
                 console.log("Working", res)
                 dispatch({ type: LOGIN_SUCCESS, payload: res.data.user });
                 setToken(res.data.token);
+                localStorage.setItem('userId', res.data.userId);
+                localStorage.setItem('username',res.data.username);
                 history.push('/dashboard/')
             })
             .catch(err => {
@@ -43,10 +45,12 @@ export const register = (newUser, history) => {
     return dispatch => {
         dispatch({ type: SIGNUP_START });
 
-        axios().post('/signup', newUser)
+        axios().post('/register', newUser)
             .then(res => {
                 console.log(res)
                 dispatch({ type: SIGNUP_SUCCESS, payload: res.data.user });
+                localStorage.setItem('userId', res.data.userId);
+                localStorage.setItem('username',res.data.username);
                 if (history && history.goBack){
                     history.goBack();
                 }
