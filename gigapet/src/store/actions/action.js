@@ -1,4 +1,6 @@
-import { AxiosWithAuth as axios, setToken} from '../../utils/AxiosWithAuth';
+import { AxiosWithAuth, setToken} from '../../utils/AxiosWithAuth';
+import axios from 'axios';
+
 
 // action types for login/register
 export const LOGIN_START = "LOGIN_START";
@@ -25,7 +27,7 @@ export const login = (credentials, history) => {
     return dispatch => {
         dispatch({ type: LOGIN_START });
         
-        axios().post('/login', credentials)
+        axios.post('https://gigapetapi.herokuapp.com/api/login', credentials)
             .then(res => {
                 console.log("Working", res)
                 dispatch({ type: LOGIN_SUCCESS, payload: res.data.user });
@@ -43,7 +45,7 @@ export const register = (newUser, history) => {
     return dispatch => {
         dispatch({ type: SIGNUP_START });
 
-        axios().post('/signup', newUser)
+        axios.post('https://gigapetapi.herokuapp.com/api/register', newUser)
             .then(res => {
                 console.log(res)
                 dispatch({ type: SIGNUP_SUCCESS, payload: res.data.user });
@@ -54,6 +56,23 @@ export const register = (newUser, history) => {
             .catch(err => {
                 console.log(err.response)
                 dispatch({ type: SIGNUP_FAIL, payload: err.response })
+            })
+    }
+}
+
+// Update action
+export const updateFoodEntry = ({id, ...details}) => {
+    return dispatch => {
+        
+        dispatch({ type: UPDATE_START })
+        
+        AxiosWithAuth().put(`update/${id}`, details)
+            .then(res => {
+                dispatch({ type: UPDATE_SUCCESS, payload: details })
+            })
+            .catch(err => {
+                console.log(err.response)
+                dispatch({ type: UPDATE_FAIL, payload: err.response})
             })
     }
 }
