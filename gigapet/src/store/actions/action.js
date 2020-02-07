@@ -1,4 +1,6 @@
-import { AxiosWithAuth as axios, setToken} from '../../utils/AxiosWithAuth';
+import { AxiosWithAuth, setToken} from '../../utils/AxiosWithAuth';
+import axios from 'axios';
+
 
 // action types for login/register
 export const LOGIN_START = "LOGIN_START";
@@ -22,20 +24,23 @@ export const DELETE = "DELETE";
 
 
 export const login = (credentials, history) => {
+    // console.log(credentials)
     return dispatch => {
         dispatch({ type: LOGIN_START });
-        
-        axios().post('/login', credentials)
+        // https://gigapetapi.herokuapp.com/api/login
+        axios.post('https://gigapetapi.herokuapp.com/api/login', credentials)
             .then(res => {
                 console.log("Working", res)
+                
                 dispatch({ type: LOGIN_SUCCESS, payload: res.data.user });
                 setToken(res.data.token);
-                localStorage.setItem('userId', res.data.userId);
-                localStorage.setItem('username',res.data.username);
+                localStorage.setItem('userId', res.data.userId)
+                localStorage.setItem('username', res.data.username)
                 history.push('/dashboard/')
             })
             .catch(err => {
                 console.log("Failing", err.response)
+                // console.log(credentials)
                 dispatch({ type: LOGIN_FAIL, payload: err.response });
             })
     }
@@ -45,12 +50,12 @@ export const register = (newUser, history) => {
     return dispatch => {
         dispatch({ type: SIGNUP_START });
 
-        axios().post('/register', newUser)
+        axios.post('https://gigapetapi.herokuapp.com/api/register', newUser)
             .then(res => {
                 console.log(res)
                 dispatch({ type: SIGNUP_SUCCESS, payload: res.data.user });
-                localStorage.setItem('userId', res.data.userId);
-                localStorage.setItem('username',res.data.username);
+                localStorage.setItem('userId', res.data.userId)
+                localStorage.setItem('username', res.data.username)
                 if (history && history.goBack){
                     history.goBack();
                 }
@@ -58,6 +63,41 @@ export const register = (newUser, history) => {
             .catch(err => {
                 console.log(err.response)
                 dispatch({ type: SIGNUP_FAIL, payload: err.response })
+            })
+    }
+}
+
+// Update action
+export const updateFoodEntry = ({id, ...details}) => {
+    return dispatch => {
+        
+        dispatch({ type: UPDATE_START })
+        
+        AxiosWithAuth().put(`update/${id}`, details)
+            .then(res => {
+                dispatch({ type: UPDATE_SUCCESS, payload: details })
+            })
+            .catch(err => {
+                console.log(err.response)
+                dispatch({ type: UPDATE_FAIL, payload: err.response})
+            })
+    }
+}
+
+// Delete Entry
+export const deleteEntry = (history, id) => {
+    return dispatch => {
+        console.log('history is here =>', history)
+        AxiosWithAuth().delete(`remove/${id}`)
+            .then(res => {
+                console.log(res.data)
+                dispatch({ type: DELETE, payload: res })
+                if(history && history.goBack) history.goBack();
+                console.log('history too', history)
+            })
+            .catch(err => {
+                console.log(err.response)
+                dispatch({ type: UPDATE_FAIL, payload: err.response})
             })
     }
 }
