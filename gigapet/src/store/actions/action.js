@@ -19,24 +19,26 @@ export const FETCH_FAIL = "FETCH_FAIL";
 export const UPDATE_START = "UPDATE_START";
 export const UPDATE_SUCCESS = "UPDATE_SUCCESS";
 export const UPDATE_FAIL = "UPDATE_FAIL";
-export const UPDATE_ERROR = "UPDATE_ERROR";
 
 export const DELETE = "DELETE";
 
 
 export const login = (credentials, history) => {
+    console.log(credentials)
     return dispatch => {
         dispatch({ type: LOGIN_START });
-        
+        // https://gigapetapi.herokuapp.com/api/login
         axios.post('https://gigapetapi.herokuapp.com/api/login', credentials)
             .then(res => {
                 console.log("Working", res)
+                
                 dispatch({ type: LOGIN_SUCCESS, payload: res.data.user });
                 setToken(res.data.token);
                 history.push('/dashboard/')
             })
             .catch(err => {
                 console.log("Failing", err.response)
+                // console.log(credentials)
                 dispatch({ type: LOGIN_FAIL, payload: err.response });
             })
     }
@@ -91,7 +93,7 @@ export const deleteEntry = (history, id) => {
             })
             .catch(err => {
                 console.log(err.response)
-                dispatch({ type: UPDATE_ERROR, payload: err.response})
+                dispatch({ type: UPDATE_FAIL, payload: err.response})
             })
     }
 }
