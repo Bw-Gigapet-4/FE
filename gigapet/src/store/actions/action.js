@@ -24,7 +24,7 @@ export const DELETE = "DELETE";
 
 
 export const login = (credentials, history) => {
-    console.log(credentials)
+    // console.log(credentials)
     return dispatch => {
         dispatch({ type: LOGIN_START });
         // https://gigapetapi.herokuapp.com/api/login
@@ -34,6 +34,8 @@ export const login = (credentials, history) => {
                 
                 dispatch({ type: LOGIN_SUCCESS, payload: res.data.user });
                 setToken(res.data.token);
+                localStorage.setItem('userId', res.data.userId)
+                localStorage.setItem('username', res.data.username)
                 history.push('/dashboard/')
             })
             .catch(err => {
@@ -52,6 +54,8 @@ export const register = (newUser, history) => {
             .then(res => {
                 console.log(res)
                 dispatch({ type: SIGNUP_SUCCESS, payload: res.data.user });
+                localStorage.setItem('userId', res.data.userId)
+                localStorage.setItem('username', res.data.username)
                 if (history && history.goBack){
                     history.goBack();
                 }
