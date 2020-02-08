@@ -41,7 +41,7 @@ export default function History(props){
 
     return(
         <div>
-            <NavBar />
+            <NavBar id={id}/>
             <h2>History</h2>
             {formShow === true ? <EditForm userid={id} itemid={itemId} fn={removeForm}/> : null}
             

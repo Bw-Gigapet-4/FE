@@ -8,7 +8,7 @@ export default function(props){
            <div>
                 {props.page === "dash" ? 
                 <Link to={`/history/${props.id}`} >History</Link> :
-                <Link to="/dashboard/">Dashboard</Link>
+                <Link to={`/dashboard/${props.id}`}>Dashboard</Link>
                 }
             </div> 
             <div>

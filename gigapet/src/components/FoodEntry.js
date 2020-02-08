@@ -6,13 +6,14 @@ import { connect } from 'react-redux';
 //import axios from "axios";
 import { FormFood, FormError, FoodFormLable  } from "../styles"
 
-const FoodFields = ({ id, errors, touched })=>{
+const FoodFields = ({ user_id, errors, touched })=>{
+    
     return(
         <div>
             <Form>
                 <FormFood>
                     <FoodFormLable >Add a food entry</FoodFormLable >
-                    <Field type="hidden" name="id" value={id}/>
+                    <Field type="hidden" name="user_id" value={user_id}/>
                     <div>
                         <Field type="date" name="date" />
                         {touched.date && errors.date && <FormError>{errors.date}</FormError>}
@@ -56,9 +57,9 @@ const mapStateToProps = (state) => {
 }
 
 const FoodEntry = withFormik({
-    mapPropsToValues({id, date, category, food, serving_size}){
+    mapPropsToValues({user_id, date, category, food, serving_size}){
         return{
-            user_id: id || "",
+            user_id: user_id || "",
             date: date || "",
             category: category || "",
             serving_size: serving_size || "",
@@ -86,10 +87,11 @@ const FoodEntry = withFormik({
     }),
 
     // insert resetForm  when axios call is completed
-    handleSubmit(values, formikBag){
+    handleSubmit(values, formikBag,){
         console.log("submit from FoodEntry", values);
 
-        formikBag.props.addNewEntry(values)
+        formikBag.props.addNewEntry(values);
+        formikBag.props.fn();
 
     }
 
