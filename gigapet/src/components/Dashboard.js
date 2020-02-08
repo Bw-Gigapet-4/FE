@@ -2,36 +2,42 @@ import React, { useState, useEffect } from 'react';
 import FoodEntry from './FoodEntry';
 import { DashContainer, DashNav } from '../styles'
 import {Link, Route} from 'react-router-dom'; 
-//import  {AxiosWithAuth as axios} from '../utils/AxiosWithAuth';
+import  {AxiosWithAuth as axios} from '../utils/AxiosWithAuth';
 import CategoryInfo from './CategoryInfo';
 import NavBar from './NavBar';
 
- 
+
 
 function Dashboard(){
 
     // get food data and set to state
-    const {foodData, setFoodData} = useState([]);
+    const [foodData, setFoodData] = useState([]);
+
+    let user = localStorage.getItem("username");
+    let id = localStorage.getItem("userId");
+    
 
     useEffect(()=>{
-        // axios()
-        // .get('')
-        // .then(result =>{
-        //     console.log("api result",result)
-        //     setFoodData("result.pathtodata")
-        // })
-        // .catch(error =>{
-        //     console.log(error.response);
-        // })    
+        axios()
+        .get(`/food/${id}`) 
+        .then(result =>{
+            //console.log("api result",result);
+            setFoodData(result.data);
+            
+        })
+        .catch(error =>{
+            console.log(error.response);
+        })
+            
     },[])
 
     return (
         <div>
             
-            <NavBar page="dash" id={"userid"}/>
+            <NavBar page="dash" id={id}/>
 
-            <h1>Welcome { "username" }</h1>
-            <FoodEntry id={"userid"}/>
+            <h1>Welcome { user }</h1>
+            <FoodEntry id={id}/>
             
             <DashContainer>
                 <DashNav>
@@ -46,17 +52,17 @@ function Dashboard(){
                 
                 <Route 
                 exact path ="/dashboard/" 
-                render={props => <CategoryInfo {...props} category="fruits" title ="fruit" data={foodData}/>}
+                render={props => <CategoryInfo {...props} category="fruit" title ="fruit" data={foodData}/>}
                 />
 
                 <Route 
                 exact path ="/dashboard/vegetables/" 
-                render={props => <CategoryInfo {...props} category="vegtables" title="vegtable" data={foodData}/>}
+                render={props => <CategoryInfo {...props} category="vegtable" title="vegtable" data={foodData}/>}
                 />
 
                 <Route 
                 exact path ="/dashboard/grains" 
-                render={props => <CategoryInfo {...props} category="grains" title="whole grain" data={foodData}/>}
+                render={props => <CategoryInfo {...props} category="grain" title="whole grain" data={foodData}/>}
                 />
 
                 <Route 

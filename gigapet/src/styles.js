@@ -80,6 +80,15 @@ const Nav = styled.nav`
     background: #e6e6e6;
     border-bottom: 3px solid #a6a6a6;
 `;
+
+const DisplayBox2 =styled.div`
+    width: 150px;
+    border: 2px solid #a6a6a6;
+    border-radius: 15px;
+    padding: 5px;
+    margin: 5px auto;
+
+`;
  
 export {
     FormContainer, 
@@ -91,6 +100,7 @@ export {
     DashNav,
     DisplayFlex,
     DisplayBox,
-    Nav, 
+    Nav,
+    DisplayBox2 
 
 }; 
