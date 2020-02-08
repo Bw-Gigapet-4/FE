@@ -20,8 +20,7 @@ function Dashboard(props){
     const updateOnEntry = () => {
         update ? setUpdate(false) : setUpdate(true)
     };
-    console.log("update",update)
-
+    
     useEffect(()=>{
         //axios call here passing in id as user id
         axios()
