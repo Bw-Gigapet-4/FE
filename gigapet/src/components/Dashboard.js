@@ -11,7 +11,7 @@ import NavBar from './NavBar';
 function Dashboard(){
 
     // get food data and set to state
-    const {foodData, setFoodData} = useState([]);
+    const [foodData, setFoodData] = useState([]);
 
     let user = localStorage.getItem("username");
     let id = localStorage.getItem("userId");
@@ -19,14 +19,16 @@ function Dashboard(){
 
     useEffect(()=>{
         axios()
-        .get(`/food/1`) //set to id after done messing with code 
+        .get(`/food/${id}`) 
         .then(result =>{
-            console.log("api result",result)
-            //setFoodData("result.pathtodata")
+            //console.log("api result",result);
+            setFoodData(result.data);
+            
         })
         .catch(error =>{
             console.log(error.response);
-        })    
+        })
+            
     },[])
 
     return (
@@ -50,17 +52,17 @@ function Dashboard(){
                 
                 <Route 
                 exact path ="/dashboard/" 
-                render={props => <CategoryInfo {...props} category="fruits" title ="fruit" data={foodData}/>}
+                render={props => <CategoryInfo {...props} category="fruit" title ="fruit" data={foodData}/>}
                 />
 
                 <Route 
                 exact path ="/dashboard/vegetables/" 
-                render={props => <CategoryInfo {...props} category="vegtables" title="vegtable" data={foodData}/>}
+                render={props => <CategoryInfo {...props} category="vegtable" title="vegtable" data={foodData}/>}
                 />
 
                 <Route 
                 exact path ="/dashboard/grains" 
-                render={props => <CategoryInfo {...props} category="grains" title="whole grain" data={foodData}/>}
+                render={props => <CategoryInfo {...props} category="grain" title="whole grain" data={foodData}/>}
                 />
 
                 <Route 

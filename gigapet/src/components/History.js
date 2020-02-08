@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import EditEntry from './EditEntry';
 import EditForm from './EditForm';
+import FoodEntry from './FoodEntry';
 import NavBar from './NavBar';
 import  {AxiosWithAuth as axios} from '../utils/AxiosWithAuth';
 
@@ -26,7 +27,7 @@ export default function History(props){
     useEffect(()=>{
         //axios call here passing in id as user id
         axios()
-        .get(`/food/1`) //set to id after done messing with code
+        .get(`/food/${id}`) 
         .then(result =>{
             console.log("api result",result)
             setHistory(result.data)
@@ -44,8 +45,6 @@ export default function History(props){
             <h2>History</h2>
             {formShow === true ? <EditForm userid={id} itemid={itemId} fn={removeForm}/> : null}
             
-            {/* map through items with EditEntry and set up props accordingly*/}
-
             {history.map((x,i)=>(
                <EditEntry
                     key={i} 
@@ -57,6 +56,7 @@ export default function History(props){
                     food={x.food}
                     serving={x.serving_size}
                 /> 
+                
             ))}
             
 
