@@ -8,28 +8,28 @@ import NavBar from './NavBar';
 
 
 
-function Dashboard(){
+function Dashboard(props){
 
     // get food data and set to state
     const [foodData, setFoodData] = useState([]);
+    // const [update, setUpdate] = useState(false)
 
     let user = localStorage.getItem("username");
-    let id = localStorage.getItem("userId");
+    let id = props.match.params.id;
     
 
     useEffect(()=>{
+        //axios call here passing in id as user id
         axios()
-        .get(`/food/1`) 
+        .get(`/food/${id}`)     
         .then(result =>{
-            console.log("api result",result);
-            setFoodData(result.data);
-            
+            console.log("api result",result)
+            setFoodData(result.data)
         })
         .catch(error =>{
             console.log(error.response);
         })
-            
-    },[])
+    },[]);
 
     return (
         <div>

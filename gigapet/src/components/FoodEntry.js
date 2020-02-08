@@ -1,10 +1,12 @@
 import React from "react";
 import { withFormik, Form, Field } from 'formik';
 import * as Yup from 'yup';
+import { addNewEntry } from '../store/actions/action';
+import { connect } from 'react-redux';
 //import axios from "axios";
 import { FormFood, FormError, FoodFormLable  } from "../styles"
 
-const FoodFields = ({ id, errors, touched})=>{
+const FoodFields = ({ id, errors, touched })=>{
     return(
         <div>
             <Form>
@@ -33,8 +35,8 @@ const FoodFields = ({ id, errors, touched})=>{
                         {touched.food && errors.food && <FormError>{errors.food}</FormError>}
                     </div>
                     <div>
-                        <Field type="text" name="portions" placeholder="Portions/Servings"/>
-                        {touched.portions && errors.portions && <FormError>{errors.portions}</FormError>}
+                        <Field type="text" name="serving_size" placeholder="Portions/Servings"/>
+                        {touched.serving_size && errors.serving_size && <FormError>{errors.serving_size}</FormError>}
                     </div>
                     <div>
                        <button type="submit">Add an Entry</button> 
@@ -47,13 +49,19 @@ const FoodFields = ({ id, errors, touched})=>{
     );
 }
 
+const mapStateToProps = (state) => {
+    return {
+        ...state
+    }
+}
+
 const FoodEntry = withFormik({
-    mapPropsToValues({id, date, category, food, portions}){
+    mapPropsToValues({id, date, category, food, serving_size}){
         return{
             user_id: id || "",
             date: date || "",
             category: category || "",
-            portions: portions || "",
+            serving_size: serving_size || "",
             food: food || "",
         };
     },
@@ -68,7 +76,7 @@ const FoodEntry = withFormik({
         .notOneOf(["none"])
         .required("You must choose a food item."),
         
-        portions: Yup
+        serving_size: Yup
         .number("Entry must be a number.")
         .required("Portion/Servings is required"),
 
@@ -78,12 +86,13 @@ const FoodEntry = withFormik({
     }),
 
     // insert resetForm  when axios call is completed
-    handleSubmit(values){
+    handleSubmit(values, formikBag){
         console.log("submit from FoodEntry", values);
 
+        formikBag.props.addNewEntry(values)
 
     }
 
 })(FoodFields);
 
-export default FoodEntry;
+export default connect(mapStateToProps, {addNewEntry})(FoodEntry);
