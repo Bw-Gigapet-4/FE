@@ -14,7 +14,7 @@ export default function EditEntry(props){
                 <p>Date: {props.date}</p> 
                 <p>Catagory: {props.catagory}</p>
                 <p>Food: {props.food}</p>
-                <p>Serving: {props.serving}</p>
+                <p>Servings: {props.serving}</p>
                 <div>
                     <button onClick={()=>props.fn(props.itemId)}>Edit</button>
                 </div>

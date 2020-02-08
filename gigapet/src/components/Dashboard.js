@@ -2,36 +2,40 @@ import React, { useState, useEffect } from 'react';
 import FoodEntry from './FoodEntry';
 import { DashContainer, DashNav } from '../styles'
 import {Link, Route} from 'react-router-dom'; 
-//import  {AxiosWithAuth as axios} from '../utils/AxiosWithAuth';
+import  {AxiosWithAuth as axios} from '../utils/AxiosWithAuth';
 import CategoryInfo from './CategoryInfo';
 import NavBar from './NavBar';
 
- 
+
 
 function Dashboard(){
 
     // get food data and set to state
     const {foodData, setFoodData} = useState([]);
 
+    let user = localStorage.getItem("username");
+    let id = localStorage.getItem("userId");
+    
+
     useEffect(()=>{
-        // axios()
-        // .get('')
-        // .then(result =>{
-        //     console.log("api result",result)
-        //     setFoodData("result.pathtodata")
-        // })
-        // .catch(error =>{
-        //     console.log(error.response);
-        // })    
+        axios()
+        .get(`/food/1`) //set to id after done messing with code 
+        .then(result =>{
+            console.log("api result",result)
+            //setFoodData("result.pathtodata")
+        })
+        .catch(error =>{
+            console.log(error.response);
+        })    
     },[])
 
     return (
         <div>
             
-            <NavBar page="dash" id={"userid"}/>
+            <NavBar page="dash" id={id}/>
 
-            <h1>Welcome { "username" }</h1>
-            <FoodEntry id={"userid"}/>
+            <h1>Welcome { user }</h1>
+            <FoodEntry id={id}/>
             
             <DashContainer>
                 <DashNav>

@@ -15,7 +15,7 @@ export default function History(props){
     let id = props.match.params.id;
     
     const showEditForm = (x) =>{
-        formShow === false ? setFormShow(true) : setFormShow(false);
+        formShow === false && setFormShow(true);
         setItemId(x);
     };
 
@@ -26,10 +26,10 @@ export default function History(props){
     useEffect(()=>{
         //axios call here passing in id as user id
         axios()
-        .get('/food/')
+        .get(`/food/1`) //set to id after done messing with code
         .then(result =>{
             console.log("api result",result)
-            //setHistory(result.pathtodata)
+            setHistory(result.data)
         })
         .catch(error =>{
             console.log(error.response);
@@ -45,15 +45,20 @@ export default function History(props){
             {formShow === true ? <EditForm userid={id} itemid={itemId} fn={removeForm}/> : null}
             
             {/* map through items with EditEntry and set up props accordingly*/}
-            <EditEntry 
-                userId={id} 
-                itemId={"1"} 
-                fn={showEditForm}
-                date={""}
-                catagory={""}
-                food={""}
-                serving={""}
-            />
+
+            {history.map((x,i)=>(
+               <EditEntry
+                    key={i} 
+                    userId={x.user_id} 
+                    itemId={x.id} 
+                    fn={showEditForm}
+                    date={""}
+                    catagory={x.category}
+                    food={x.food}
+                    serving={x.serving_size}
+                /> 
+            ))}
+            
 
         </div>
     );
