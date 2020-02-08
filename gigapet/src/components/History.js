@@ -27,7 +27,7 @@ export default function History(props){
     useEffect(()=>{
         //axios call here passing in id as user id
         axios()
-        .get(`/food/1`)     
+        .get(`/food/${id}`)     
         .then(result =>{
             console.log("api result",result)
             setHistory(result.data)
