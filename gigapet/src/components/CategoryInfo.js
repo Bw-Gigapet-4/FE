@@ -55,7 +55,7 @@ export default function CategoryInfo(props){
             </DisplayBox>
 
             <DisplayBox>
-                <h3>This months total {props.title} intake</h3>
+                <h3>This months {props.title} intake</h3>
                 {thisYearsEntries.map((x,i)=>(
                     <DisplayBox2 key={i}>
                         <h4>{x.date}</h4>
