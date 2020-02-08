@@ -19,9 +19,9 @@ function Dashboard(){
 
     useEffect(()=>{
         axios()
-        .get(`/food/${id}`) 
+        .get(`/food/1`) 
         .then(result =>{
-            //console.log("api result",result);
+            console.log("api result",result);
             setFoodData(result.data);
             
         })

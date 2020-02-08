@@ -11,22 +11,22 @@ export default function CategoryInfo(props){
     let today = new Date();
 
     let formattedDate = `${today.getFullYear()}-${(today.getMonth()+ 1)}-${today.getDate()}`;
-                        //`${(today.getMonth()+ 1)}/${today.getDate()}/${today.getFullYear()}`
+                        
     let todayDate = new Date(formattedDate).toJSON();
     let todaysEntries = filteredByCat.filter(item => item.date === todayDate);
     
 
     //filter by month
     let theFirst = `${today.getFullYear()}-${(today.getMonth()+ 1)}-01`;
-                    //`${(today.getMonth()+ 1)}/1/${today.getFullYear()}`;
+                    
     let theFirstDate = new Date(theFirst).toJSON();
                     
-    let thisMonthsEntries = filteredByCat.filter(item => item.date <= todayDate && item.date >= theFirstDate );
+    let thisMonthsEntries = filteredByCat.filter(item => item.date<= todayDate && item.date >= theFirstDate );
     
 
     //filter by year
     let newYear = `${today.getFullYear()}-01-01`
-                    //`1/1/${today.getFullYear}`;
+                    
     let newYearDate = new Date(newYear).toJSON();
 
     let thisYearsEntries = filteredByCat.filter(item => item.date <= todayDate && item.date >= newYearDate);
