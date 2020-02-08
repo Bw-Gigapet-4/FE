@@ -50,7 +50,7 @@ const FoodFields = ({ id, errors, touched})=>{
 const FoodEntry = withFormik({
     mapPropsToValues({id, date, category, food, portions}){
         return{
-            id: id || "",
+            user_id: id || "",
             date: date || "",
             category: category || "",
             portions: portions || "",
