@@ -5,7 +5,7 @@ export default function CategoryInfo(props){
    
     //filter by category
     let filteredByCat = props.data.filter(item => item.category === props.category);
-    
+   console.log("cat", props)
 
     //filter by todays date
     let today = new Date();

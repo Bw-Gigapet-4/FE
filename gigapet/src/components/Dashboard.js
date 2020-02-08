@@ -52,7 +52,7 @@ function Dashboard(){
                 
                 <Route 
                 exact path ="/dashboard/" 
-                render={props => <CategoryInfo {...props} category="fruit" title ="fruit" data={foodData}/>}
+                render={props => <CategoryInfo {...props} category="fruits" title ="fruit" data={foodData}/>}
                 />
 
                 <Route 

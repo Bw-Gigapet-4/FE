@@ -51,7 +51,7 @@ export default function History(props){
                     userId={x.user_id} 
                     itemId={x.id} 
                     fn={showEditForm}
-                    date={""}
+                    date={x.date}
                     catagory={x.category}
                     food={x.food}
                     serving={x.serving_size}
