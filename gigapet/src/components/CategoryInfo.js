@@ -9,20 +9,27 @@ export default function CategoryInfo(props){
 
     //filter by todays date
     let today = new Date();
-    let formattedDate = `${(today.getMonth()+ 1)}/${today.getDate()}/${today.getFullYear()}`
 
-    //let todaysEntries = filteredByCat.filter(item => item.date === formattedDate);
-    let todaysEntries = filteredByCat.filter(item => item.date === formattedDate);
+    let formattedDate = `${today.getFullYear()}-${(today.getMonth()+ 1)}-${today.getDate()}`;
+                        
+    let todayDate = new Date(formattedDate).toJSON();
+    let todaysEntries = filteredByCat.filter(item => item.date === todayDate);
     
 
     //filter by month
-    let theFirst = `${(today.getMonth()+ 1)}/1/${today.getFullYear()}`
-    let thisMonthsEntries = filteredByCat.filter(item => item.date <= formattedDate && item.date >= theFirst );
+    let theFirst = `${today.getFullYear()}-${(today.getMonth()+ 1)}-01`;
+                    
+    let theFirstDate = new Date(theFirst).toJSON();
+                    
+    let thisMonthsEntries = filteredByCat.filter(item => item.date<= todayDate && item.date >= theFirstDate );
     
 
     //filter by year
-    let newYear = `1/1/${today.getFullYear}`
-    let thisYearsEntries = filteredByCat.filter(item => item.date <= formattedDate && item.date >= newYear);
+    let newYear = `${today.getFullYear()}-01-01`
+                    
+    let newYearDate = new Date(newYear).toJSON();
+
+    let thisYearsEntries = filteredByCat.filter(item => item.date <= todayDate && item.date >= newYearDate);
     
     
 

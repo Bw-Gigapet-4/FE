@@ -66,7 +66,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(withFormik({
     }),
 
     handleSubmit({username, password, history}, formikBag){
-        console.log("values from submit", {username, password, login});
+        
 
         formikBag.props.login({username, password}, formikBag.props.history);
     }
