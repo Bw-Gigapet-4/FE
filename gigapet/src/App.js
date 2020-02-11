@@ -15,7 +15,7 @@ function App() {
 
       {/* Routes below should be protected */}
 
-      <Route path="/dashboard/" component={Dashboard} />
+      <Route path="/dashboard/:id" component={Dashboard} />
       <Route path="/history/:id" component={History} />
     </div>
   );

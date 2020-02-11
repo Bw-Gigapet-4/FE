@@ -5,7 +5,7 @@ export default function CategoryInfo(props){
    
     //filter by category
     let filteredByCat = props.data.filter(item => item.category === props.category);
-    
+   //console.log("cat", props)
 
     //filter by todays date
     let today = new Date();
@@ -13,7 +13,7 @@ export default function CategoryInfo(props){
     let formattedDate = `${today.getFullYear()}-${(today.getMonth()+ 1)}-${today.getDate()}`;
                         
     let todayDate = new Date(formattedDate).toJSON();
-    let todaysEntries = filteredByCat.filter(item => item.date === todayDate);
+    let todaysEntries = filteredByCat.filter(item => `${item.date}T05:00:00.000Z` === todayDate);
     
 
     //filter by month

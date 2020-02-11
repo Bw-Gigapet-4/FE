@@ -1,5 +1,6 @@
 import { AxiosWithAuth, setToken} from '../../utils/AxiosWithAuth';
 import axios from 'axios';
+//import { bindActionCreators } from '../../../../../../../../../AppData/Local/Microsoft/TypeScript/3.5/node_modules/redux';
 
 
 // action types for login/register
@@ -12,6 +13,10 @@ export const SIGNUP_SUCCESS = "SIGNUP_SUCCESS";
 export const SIGNUP_FAIL = "SIGNUP_FAIL";
 
 // action types for crud operations
+export const ADD_ENTRY_START = "ADD_ENTRY_START";
+export const ADD_ENTRY_SUCCESS = "ADD_ENTRY_SUCCESS";
+export const ADD_ENTRY_FAIL = "ADD_ENTRY_FAIL";
+
 export const FETCH_START = "FETCH_START";
 export const FETCH_SUCCESS = "FETCH_SUCCESS";
 export const FETCH_FAIL = "FETCH_FAIL";
@@ -36,7 +41,7 @@ export const login = (credentials, history) => {
                 setToken(res.data.token);
                 localStorage.setItem('userId', res.data.userId)
                 localStorage.setItem('username', res.data.username)
-                history.push('/dashboard/')
+                history.push(`/dashboard/${res.data.userId}`)
             })
             .catch(err => {
                 console.log("Failing", err.response)
@@ -64,6 +69,27 @@ export const register = (newUser, history) => {
                 console.log(err.response)
                 dispatch({ type: SIGNUP_FAIL, payload: err.response })
             })
+    }
+}
+
+// Add new entry
+export const addNewEntry = ({...newDetails}) => {
+    return dispatch => {
+        console.log('working!')
+        dispatch({ type: ADD_ENTRY_START });
+
+        const id = localStorage.getItem("userId");
+
+        AxiosWithAuth().post(`add/${id}`, newDetails)
+        .then(res => {
+            console.log(res.data)
+            dispatch({ type: ADD_ENTRY_SUCCESS, payload: res.data })
+        
+        })
+        .catch(err => {
+            console.log(err.response)
+                dispatch({ type: ADD_ENTRY_FAIL, payload: err.response })
+        })
     }
 }
 

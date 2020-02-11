@@ -27,7 +27,7 @@ export default function History(props){
     useEffect(()=>{
         //axios call here passing in id as user id
         axios()
-        .get(`/food/1`)     
+        .get(`/food/${id}`)     
         .then(result =>{
             console.log("api result",result)
             setHistory(result.data)
@@ -41,7 +41,7 @@ export default function History(props){
 
     return(
         <div>
-            <NavBar />
+            <NavBar id={id}/>
             <h2>History</h2>
             {formShow === true ? <EditForm userid={id} itemid={itemId} fn={removeForm}/> : null}
             
@@ -51,7 +51,7 @@ export default function History(props){
                     userId={x.user_id} 
                     itemId={x.id} 
                     fn={showEditForm}
-                    date={""}
+                    date={x.date}
                     catagory={x.category}
                     food={x.food}
                     serving={x.serving_size}
